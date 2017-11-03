@@ -19,3 +19,8 @@ apt-get install -y python \
 if [[ $(uname -m) == "s390x" ]] ; then
   apt-get install -y gcc-multilib g++-multilib
 fi
+
+
+git clone https://chromium.googlesource.com/chromium/tools/depot_tools.git /depot_tools
+git clone https://github.com/john-yan/ibm-buildtools-for-v8.git /buildtools
+
