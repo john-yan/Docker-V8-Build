@@ -9,9 +9,11 @@ NPROC=$(nproc)
 
 build_and_test() {
   BUILD_DIR=$1
+  rm -f /result/build-and-test-$arch.log /result/v8tests-$arch-junit.xml
   script -c "gn gen $BUILD_DIR && ninja -C $BUILD_DIR all &&
              tools/run-tests.py -j $NPROC --progress=dots --timeout=120 --no-presubmit --junitout /result/v8tests-$arch-junit.xml --outdir=$BUILD_DIR --exhaustive-variants" \
     /result/build-and-test-$arch.log
+  chmod go+w /result/build-and-test-$arch.log /result/v8tests-$arch-junit.xml
 }
 
 if [[ $MACHINE == "s390x" ]] ; then
