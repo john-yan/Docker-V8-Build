@@ -1,5 +1,9 @@
 #!/bin/bash -x
 
+echo "umask 0" >> $HOME/.bashrc
+chmod +x $HOME/.bashrc
+umask 0
+
 export VPYTHON_BYPASS="manually managed python not supported by chrome operations"
 BUILD_ARCHES=
 MACHINE=$(uname -m)
@@ -9,11 +13,13 @@ NPROC=$(nproc)
 
 build_and_test() {
   BUILD_DIR=$1
-  rm -f /result/build-and-test-$arch.log /result/v8tests-$arch-junit.xml
-  script -c "gn gen $BUILD_DIR && ninja -C $BUILD_DIR all &&
-             tools/run-tests.py -j $NPROC --progress=dots --timeout=120 --no-presubmit --junitout /result/v8tests-$arch-junit.xml --outdir=$BUILD_DIR --exhaustive-variants" \
-    /result/build-and-test-$arch.log
-  chmod go+w /result/build-and-test-$arch.log /result/v8tests-$arch-junit.xml
+  rm -f /result/$arch-*
+  script -c "gn gen $BUILD_DIR && ninja -C $BUILD_DIR all && \
+             tools/run-tests.py -j $NPROC --time --progress=dots --timeout=120 --no-presubmit \
+                                --json-test-results=/result/$arch-test-result.json \
+                                --junitout=/result/$arch-junit.xml \
+                                --outdir=$BUILD_DIR --exhaustive-variants" \
+    /result/$arch-script.log
 }
 
 if [[ $MACHINE == "s390x" ]] ; then
