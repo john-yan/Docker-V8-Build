@@ -16,7 +16,7 @@ build_and_test() {
   BUILD_DIR=$1
   rm -f /result/$arch-*
   script -e -c "gn gen $BUILD_DIR && ninja -C $BUILD_DIR all && \
-             tools/run-tests.py -j $NPROC --time --progress=dots --timeout=120 --no-presubmit \
+             tools/run-tests.py -j $NPROC --time --progress=dots --timeout=240 --no-presubmit \
                                 --json-test-results=/result/$arch-test-result.json \
                                 --junitout=/result/$arch-junit.xml \
                                 --outdir=$BUILD_DIR --exhaustive-variants" \
