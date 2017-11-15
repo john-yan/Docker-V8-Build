@@ -4,7 +4,6 @@ echo "umask 0" >> $HOME/.bashrc
 chmod +x $HOME/.bashrc
 umask 0
 
-export VPYTHON_BYPASS="manually managed python not supported by chrome operations"
 BUILD_ARCHES=
 MACHINE=$(uname -m)
 V8="v8"
