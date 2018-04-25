@@ -14,6 +14,7 @@ apt-get install -y python \
                    libgnome-keyring-dev \
                    libatk1.0-dev \
                    libgtk-3-dev \
+                   tzdata \
                    wget
 
 if [[ $(uname -m) == "s390x" ]] ; then
