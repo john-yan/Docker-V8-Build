@@ -18,7 +18,7 @@ build_and_test() {
              tools/run-tests.py -j $NPROC --time --progress=dots --timeout=240 --no-presubmit \
                                 --json-test-results=/result/$arch-test-result.json \
                                 --junitout=/result/$arch-junit.xml \
-                                --outdir=$BUILD_DIR --exhaustive-variants" \
+                                --outdir=$BUILD_DIR --variants=exhaustive" \
     /result/$arch-script.log
   if [[ $? -ne 0 ]] ; then
     echo "Build and Test for $arch failed."
