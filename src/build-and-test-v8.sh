@@ -27,11 +27,11 @@ build_and_test() {
 }
 
 if [[ $MACHINE == "s390x" ]] ; then
-  BUILD_ARCHES=("s390" "s390x")
+  BUILD_ARCHES=("s390x")
 elif [[ $MACHINE == "ppc64le" ]] ; then
   BUILD_ARCHES=("ppc64")
 elif [[ $MACHINE == "x86_64" ]] ; then
-  BUILD_ARCHES=("s390" "s390x" "ppc64")
+  BUILD_ARCHES=("s390x" "ppc64")
 else
   echo "Unsupported arch $MACHINE !!!"
   exit 1;
